@@ -1,37 +1,37 @@
+DROP DATABASE ayuitaclone;
+CREATE DATABASE ayuitaclone CHARACTER SET utf8;
 
-
-DELETE FROM SQLITE_SEQUENCE WHERE NAME = 'items';
-DELETE FROM SQLITE_SEQUENCE WHERE NAME = 'types';
-DELETE FROM SQLITE_SEQUENCE WHERE NAME = 'thanks';
-DELETE FROM SQLITE_SEQUENCE WHERE NAME = 'vips';
+USE ayuitaclone;
 
 DROP TABLE IF EXISTS items;
 CREATE TABLE items (
   id INTEGER(32) AUTO_INCREMENT,
-  owner_name VARCHAR(255),
-  owner_email VARCHAR(255),
+  provider_name VARCHAR(255),
+  provider_email VARCHAR(255),
   delete_password CHAR(48),
   name VARCHAR(255),
   type INTEGER(2),
   uri TEXT,
-  force_post INTEGER1(1),
-  download_limit INTEGER(4)
+  force_post INTEGER(1),
+  dl_limit INTEGER(4) DEFAULT 0,
+  dl_count INTEGER(4) DEFAULT 0,
   created_at DATETIME,
-  updated_at DATETIME
+  updated_at DATETIME,
   deleted_at DATETIME,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS types;
 CREATE TABLE types (
-  id INTEGER(32),
+  id INTEGER(32) AUTO_INCREMENT,
   name VARCHAR(255),
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS thanks;
 CREATE TABLE thanks (
-  id INTEGER(32),
+  id INTEGER(32) AUTO_INCREMENT,
+  item_id INTEGER(32) NOT NULL,
   name VARCHAR(255),
   email VARCHAR(255),
   comment TEXT,
@@ -43,9 +43,40 @@ CREATE TABLE thanks (
 
 DROP TABLE IF EXISTS vips;
 CREATE TABLE vips (
-
+  id INTEGER(32) AUTO_INCREMENT,
+  login VARCHAR(255),
+  password VARCHAR(255),
   created_at DATETIME,
-  updated_at DATETIME
+  updated_at DATETIME,
   deleted_at DATETIME,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8;
+
+INSERT INTO types ( name ) VALUES ( '写真' );
+INSERT INTO types ( name ) VALUES ( '映像' );
+INSERT INTO types ( name ) VALUES ( '詩' );
+INSERT INTO types ( name ) VALUES ( 'その他' );
+
+INSERT INTO items (
+  provider_name,
+  provider_email,
+  delete_password,
+  name,
+  type,
+  uri,
+  force_post,
+  dl_limit,
+  created_at,
+  updated_at
+) VALUES (
+  '名無しのポエム職人',
+  '774poem@example.com',
+  '9999',
+  '青春ポエム3',
+  1,
+  'http://example.com/poem/seisyun3.txt',
+  1,
+  99,
+  NOW(),
+  NOW()
+);
