@@ -28,7 +28,7 @@
   <tr>
     <td><?php echo date( 'Y/m/d', strtotime( $i->created_at ) ) ?></td>
     <td><?php echo $i->provider_name ?></td>
-    <td><?php echo anchor( "items/{$i->id}", $i->name ) ?></td>
+    <td><?php echo anchor( "items/show/{$i->id}", $i->name ) ?></td>
     <td><?php echo $i->type_name ?></td>
     <td><?php echo $i->dl_count ?></td>
     <td><?php echo display_limit( $i->dl_limit ) ?></td>

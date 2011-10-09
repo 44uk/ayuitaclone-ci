@@ -8,6 +8,7 @@ CREATE TABLE items (
   id INTEGER(32) AUTO_INCREMENT,
   provider_name VARCHAR(255),
   provider_email VARCHAR(255),
+  provider_comment VARCHAR(255),
   delete_password CHAR(48),
   name VARCHAR(255),
   type INTEGER(2),
@@ -60,6 +61,7 @@ INSERT INTO types ( name ) VALUES ( 'その他' );
 INSERT INTO items (
   provider_name,
   provider_email,
+  provider_comment,
   delete_password,
   name,
   type,
@@ -71,6 +73,7 @@ INSERT INTO items (
 ) VALUES (
   '名無しのポエム職人',
   '774poem@example.com',
+  '青春時代の熱き思いでを込めたポエムです。',
   '9999',
   '青春ポエム3',
   1,

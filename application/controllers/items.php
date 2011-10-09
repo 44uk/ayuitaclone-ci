@@ -10,6 +10,15 @@ class Items extends CI_Controller {
     $this->load->view( 'items/index', $data ) ;
   }
 
+  public function show( $id ) {
+    $this->load->model( 'Item_model' );
+    $data = array(
+      'item' => $this->Item_model->find_by_id( $id ),
+    );
+
+    $this->load->view( 'items/show', $data ) ;
+  }
+
   public function add() {
     $this->load->model( 'Type_model' );
     $data = array(

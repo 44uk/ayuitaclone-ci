@@ -14,13 +14,13 @@
 <?php echo form_label( 'メールアドレス' , 'provider_email' ) ?>
 <?php echo form_input( 'provider_email' ) ?>
 
-<?php echo form_label( 'delete_password', '削除用パスワード' ) ?>
+<?php echo form_label( '削除用パスワード', 'delete_password' ) ?>
 <?php echo form_input( 'delete_password' ) ?>
 
-<?php echo form_label( 'name', '提供品名' ) ?>
+<?php echo form_label( '提供品名', 'name' ) ?>
 <?php echo form_input( 'name' ) ?>
 
-<?php echo form_label( 'type', '提供品種別' ) ?>
+<?php echo form_label( '提供品種別', 'type' ) ?>
 <select name="" id="">
   <option value="">写真</option>
   <option value="">映像</option>
@@ -28,13 +28,13 @@
   <option value="">その他</option>
 </select>
 
-<?php echo form_label( 'name', '提供品URL' ) ?>
-<?php echo form_textarea( 'name' ) ?>
+<?php echo form_label( '提供品URL', 'uri' ) ?>
+<?php echo form_textarea( 'uri' ) ?>
 
-<?php echo form_label( 'force_post', '強制書き込み要求' ) ?>
+<?php echo form_label( '強制書き込み要求', 'force_post' ) ?>
 <?php echo form_checkbox( 'force_post' ) ?>全員に書き込みをさせる
 
-<?php echo form_label( 'dl_limit', 'ダウンロード制限数' ) ?>
+<?php echo form_label( 'ダウンロード制限数', 'dl_limit' ) ?>
 <?php echo form_input( 'dl_limit' ) ?>(制限なしの場合は「0」)
 
 <?php echo form_submit( 'add', '送信' ) ?>
