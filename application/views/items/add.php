@@ -6,6 +6,8 @@
 
 <?php echo $this->view( 'shared/nav' ) ?>
 
+<?php echo validation_errors() ?>
+
 <?php echo form_open( 'items/confirm' ) ?>
 
   <?php echo form_label( 'お名前', 'provider_name' ) ?>

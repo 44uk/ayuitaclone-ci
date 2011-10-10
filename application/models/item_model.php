@@ -20,4 +20,51 @@ class Item_model extends CI_Model {
       ->get( 'items' );
     return $res->row();
   }
+
+
+
+  public function get_rules(){
+    return array(
+     array(
+       'field'   => 'provider_name',
+       'label'   => 'お名前',
+       'rules'   => 'required'
+      ),
+      array(
+       'field'   => 'provider_email',
+       'label'   => 'メールアドレス',
+       'rules'   => 'required|valid_email'
+      ),
+      array(
+       'field'   => 'delete_password',
+       'label'   => '削除用パスワード',
+       'rules'   => 'required|alpha_numeric'
+      ),
+      array(
+       'field'   => 'name',
+       'label'   => '提供品名',
+       'rules'   => 'required'
+      ),
+      array(
+       'field'   => 'type',
+       'label'   => '提供品種別',
+       'rules'   => 'required|is_natural_no_zero'
+      ),
+      array(
+       'field'   => 'uri',
+       'label'   => '提供品URI',
+       'rules'   => 'required'
+      ),
+      array(
+       'field'   => 'force_post',
+       'label'   => '強制書き込み要求',
+       'rules'   => 'required'
+      ),
+      array(
+       'field'   => 'dl_limit',
+       'label'   => 'ダウンロード制限数',
+       'rules'   => 'required|is_natural_no_zero'
+      ),
+    );
+  }
 }

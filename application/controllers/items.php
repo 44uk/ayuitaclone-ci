@@ -29,14 +29,25 @@ class Items extends CI_Controller {
   }
 
   public function confirm() {
-    $this->load->view( 'items/confirm' ) ;
+    $this->load->model( 'Item_model' );
+
+    $this->form_validation->set_rules(
+      $this->Item_model->get_rules()
+    );
+
+    if( TRUE === $this->form_validation->run() ){
+      $this->load->view( 'items/confirm' ) ;
+    }else{
+      $this->load->view( 'items/add' ) ;
+      //redirect('items/add', 'refresh');
+    }
   }
 
-  public function edit() {
+  public function edit( $id ) {
 
   }
 
-  public function delete() {
+  public function delete( $id ) {
 
   }
 }

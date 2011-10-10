@@ -28,7 +28,7 @@
   <?php echo form_open( 'items/thank' ) ?>
 
   <?php echo form_label( 'お名前', 'name' ) ?>
-  <?php echo form_input( 'name' ) ?>
+  <?php echo form_input( 'name', set_value('name') ) ?>
 
   <?php echo form_label( 'メールアドレス', 'email' ) ?>
   <?php echo form_input( 'email' ) ?>
