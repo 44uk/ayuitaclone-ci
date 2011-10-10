@@ -28,6 +28,10 @@ class Items extends CI_Controller {
     $this->load->view( 'items/add', $data ) ;
   }
 
+  public function edit( $id ) {
+
+  }
+
   public function confirm() {
     $this->load->model( 'Item_model' );
 
@@ -35,16 +39,30 @@ class Items extends CI_Controller {
       $this->Item_model->get_rules()
     );
 
+    $this->load->model( 'Type_model' );
+    $data = array(
+      'types' => $this->Type_model->get_dropdown(),
+    );
+
     if( TRUE === $this->form_validation->run() ){
-      $this->load->view( 'items/confirm' ) ;
+      $this->load->view( 'items/confirm', $data ) ;
     }else{
-      $this->load->view( 'items/add' ) ;
-      //redirect('items/add', 'refresh');
+      $this->add();
     }
   }
 
-  public function edit( $id ) {
+  public function complete() {
+    $this->load->model( 'Item_model' );
 
+    $this->form_validation->set_rules(
+      $this->Item_model->get_rules()
+    );
+
+    if( TRUE === $this->form_validation->run() ){
+      $this->load->view( 'items/complete' ) ;
+    }else{
+      $this->add();
+    }
   }
 
   public function delete( $id ) {

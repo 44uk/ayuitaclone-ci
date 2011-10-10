@@ -58,7 +58,7 @@ class Item_model extends CI_Model {
       array(
        'field'   => 'force_post',
        'label'   => '強制書き込み要求',
-       'rules'   => 'required'
+       'rules'   => 'is_natural_no_zero'
       ),
       array(
        'field'   => 'dl_limit',
