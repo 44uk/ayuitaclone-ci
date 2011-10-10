@@ -21,7 +21,10 @@ class Item_model extends CI_Model {
     return $res->row();
   }
 
-
+  public function create( $data ){
+    $res = $this->db->insert( 'items', $data );
+    return $res;
+  }
 
   public function get_rules(){
     return array(

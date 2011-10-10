@@ -58,7 +58,11 @@ class Items extends CI_Controller {
       $this->Item_model->get_rules()
     );
 
-    if( TRUE === $this->form_validation->run() ){
+    if( TRUE === $this->form_validation->run() && $this->Item_model->create( $data ) ){
+
+
+
+
       $this->load->view( 'items/complete' ) ;
     }else{
       $this->add();
