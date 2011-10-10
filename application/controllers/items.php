@@ -22,7 +22,7 @@ class Items extends CI_Controller {
   public function add() {
     $this->load->model( 'Type_model' );
     $data = array(
-      'types' => $this->Type_model->find_all(),
+      'types' => $this->Type_model->get_dropdown(),
     );
 
     $this->load->view( 'items/add', $data ) ;

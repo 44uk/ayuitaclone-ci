@@ -37,7 +37,6 @@ CREATE TABLE thanks (
   email VARCHAR(255),
   comment TEXT,
   created_at DATETIME,
-  updated_at DATETIME,
   deleted_at DATETIME,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8;
@@ -81,5 +80,19 @@ INSERT INTO items (
   1,
   99,
   NOW(),
+  NOW()
+);
+
+INSERT INTO thanks (
+  item_id,
+  name,
+  email,
+  comment,
+  created_at
+) VALUES (
+  1,
+  '通りすがりの名無し',
+  'a774@example.com',
+  'ポエム、詠ませていただきます。ありがとうございました。',
   NOW()
 );

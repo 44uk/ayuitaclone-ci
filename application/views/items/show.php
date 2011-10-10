@@ -6,12 +6,6 @@
 
 <?php echo $this->view( 'shared/nav' ) ?>
 
-<ul>
-  <li>要書込のものは追加書き込みをすることでアドレスが現れます。</li>
-  <li>UP職人はD/Lできる人数を設定できます。設定人数を超えると提供品のアドレスは表示されません。</li>
-  <li>優秀UP職人として活動していただいた方にはVIP特典が贈られます。</li>
-</ul>
-
 <div id="provider">
   <h3><?php echo $item->name ?></h3>
   <h4><?php echo $item->provider_name ?></h4>
@@ -21,7 +15,30 @@
 </div>
 
 <div id="thanks">
+  <?php foreach( $thanks as $t ): ?>
+  <div class="post">
+    <p><?php echo $t->name ?></p>
+    <p><?php echo $t->created_at ?></p>
+    <pre><?php echo $t->comment ?></pre>
+  </div>
+  <?php endforeach ?>
+</div>
 
+<div id="post">
+  <?php echo form_open( 'items/thank' ) ?>
+
+  <?php echo form_label( 'お名前', 'name' ) ?>
+  <?php echo form_input( 'name' ) ?>
+
+  <?php echo form_label( 'メールアドレス', 'email' ) ?>
+  <?php echo form_input( 'email' ) ?>
+
+  <?php echo form_label( '発言', 'email' ) ?>
+  <?php echo form_textarea( 'post' ) ?>
+
+  <?php echo form_submit( 'post', '送信' ) ?>
+
+  <?php echo form_close() ?>
 </div>
 
 <?php echo $this->view( 'shared/footer' ) ?>
