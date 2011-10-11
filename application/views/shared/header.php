@@ -1,3 +1,3 @@
 <h1>
-  <?php echo 'AyuIta-Clone' ?>
+  <?php echo anchor( index_page(), 'AyuIta-Clone' ) ?>
 </h1>

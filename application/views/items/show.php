@@ -31,10 +31,10 @@
   <?php echo form_input( 'name', set_value('name') ) ?>
 
   <?php echo form_label( 'メールアドレス', 'email' ) ?>
-  <?php echo form_input( 'email' ) ?>
+  <?php echo form_input( 'email', set_value('email') ) ?>
 
-  <?php echo form_label( '発言', 'email' ) ?>
-  <?php echo form_textarea( 'post' ) ?>
+  <?php echo form_label( '発言', 'post' ) ?>
+  <?php echo form_textarea( 'post', set_value('post') ) ?>
 
   <?php echo form_submit( 'post', '送信' ) ?>
 

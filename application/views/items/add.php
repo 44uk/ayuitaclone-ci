@@ -8,15 +8,15 @@
 
 <?php echo validation_errors() ?>
 
-<?php echo form_open( 'items/confirm' ) ?>
+<?php echo form_open( 'items/create' ) ?>
   <?php echo form_label( 'お名前', 'provider_name' ) ?>
   <?php echo form_input( 'provider_name', set_value('provider_name') ) ?>
 
   <?php echo form_label( 'メールアドレス' , 'provider_email' ) ?>
   <?php echo form_input( 'provider_email', set_value('provider_email') ) ?>
 
-  <?php echo form_label( '削除用パスワード', 'delete_password' ) ?>
-  <?php echo form_input( 'delete_password', set_value('delete_password') ) ?>
+  <?php echo form_label( '編集用パスワード', 'pw_edit' ) ?>
+  <?php echo form_input( 'pw_edit', set_value('pw_edit') ) ?>
 
   <?php echo form_label( '提供品名', 'name' ) ?>
   <?php echo form_input( 'name', set_value('name') ) ?>

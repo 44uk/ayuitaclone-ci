@@ -15,13 +15,13 @@
   <p><?php echo set_value( 'provider_email' ) ?></p>
   <?php echo form_hidden( 'provider_email', set_value( 'provider_email' ) ) ?>
 
-  <?php echo form_label( '削除用パスワード', 'delete_password' ) ?>
-  <p><?php echo set_value( 'delete_password' ) ?></p>
-  <?php echo form_hidden( 'delete_password', set_value( 'delete_password' ) ) ?>
+  <?php echo form_label( '編集用パスワード', 'pw_edit' ) ?>
+  <p><?php echo set_value( 'pw_edit' ) ?></p>
+  <?php echo form_hidden( 'pw_edit', set_value( 'pw_edit' ) ) ?>
 
   <?php echo form_label( '提供品名', 'name' ) ?>
   <p><?php echo set_value( 'name' ) ?></p>
-  <?php echo form_hidden( 'delete_password', set_value( 'delete_password' ) ) ?>
+  <?php echo form_hidden( 'pw_edit', set_value( 'pw_edit' ) ) ?>
 
   <?php echo form_label( '提供品種別', 'type' ) ?>
   <p><?php echo $types[ set_value( 'type' ) ] ?></p>
