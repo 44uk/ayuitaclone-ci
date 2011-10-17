@@ -22,7 +22,6 @@
     <th>種別</th>
     <th>DL数</th>
     <th>トピック状況</th>
-    <th>削除</th>
   </tr>
   <?php foreach( $items as $i ): ?>
   <tr>
@@ -32,7 +31,6 @@
     <td><?php echo $i->type_name ?></td>
     <td><?php echo $i->dl_count ?></td>
     <td><?php echo display_limit( $i->dl_limit ) ?></td>
-    <td><input type="button" value="削除" /></td>
   </tr>
   <?php endforeach ?>
 </table>

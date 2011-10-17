@@ -6,12 +6,22 @@
 
 <?php echo $this->view( 'shared/nav' ) ?>
 
+<?php echo validation_errors() ?>
+
 <div id="provider">
   <h3><?php echo $item->name ?></h3>
   <h4><?php echo $item->provider_name ?></h4>
   <p><?php echo $item->provider_comment ?></p>
   <p><?php echo $item->created_at ?></p>
-  <pre><?php echo $item->uri ?><pre>
+  <pre><?php echo $item->uri ?></pre>
+  <p>
+    <?php echo form_open( 'items/edit' ) ?>
+      <?php echo form_hidden( 'id', $item->id ) ?>
+      <?php echo form_input( 'pw_edit', set_value( 'pw_edit' ) ) ?>
+      <?php echo form_submit( 'edit', '編集' ) ?>
+      <?php echo form_button( 'destroy', '削除' ) ?>
+    <?php echo form_close() ?>
+  </p>
 </div>
 
 <div id="thanks">

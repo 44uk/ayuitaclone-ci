@@ -22,16 +22,31 @@ class Item_model extends CI_Model {
   }
 
   public function create( $data ){
+    $data[ 'pw_edit' ] = sha1( $data[ 'pw_edit' ] );
     $this->db->set( 'created_at', 'NOW()', FALSE );
     $res = $this->db->insert( 'items', $data );
     return $res;
   }
 
   public function update( $data ){
+    $data[ 'pw_edit' ] = sha1( $data[ 'pw_edit' ] );
     $this->db->set( 'updated_at', 'NOW()', FALSE );
     $this->db->where( 'id', $data['id'] );
     $res = $this->db->update( 'items', $data );
     return $res;
+  }
+
+  public function destroy_by_id( $id ){
+    $res = $this->db->delete( 'items', array( 'id' => $id ) );
+    return $res;
+  }
+
+  public function compare_edit_password( $id, $pw_edit ){
+    $res = $this->db->select( 'pw_edit' )
+      ->where( 'id', $id )
+      ->where( 'pw_edit', sha1( $pw_edit ) )
+      ->get( 'items' );
+    return 1 === $res->num_rows() ? TRUE : FALSE;
   }
 
   public function get_rules(){

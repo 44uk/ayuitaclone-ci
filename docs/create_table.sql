@@ -9,7 +9,7 @@ CREATE TABLE items (
   provider_name VARCHAR(255),
   provider_email VARCHAR(255),
   provider_comment VARCHAR(255),
-  pw_edit CHAR(48),
+  pw_edit CHAR(40),
   name VARCHAR(255),
   type INTEGER(2),
   uri TEXT,
@@ -37,7 +37,6 @@ CREATE TABLE thanks (
   email VARCHAR(255),
   comment TEXT,
   created_at DATETIME,
-  deleted_at DATETIME,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8;
 
