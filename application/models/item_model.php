@@ -74,7 +74,7 @@ class Item_model extends CI_Model {
       array(
        'field'   => 'type',
        'label'   => '提供品種別',
-       'rules'   => 'required|is_natural_no_zero'
+       'rules'   => 'required|is_natural'
       ),
       array(
        'field'   => 'uri',
@@ -84,7 +84,7 @@ class Item_model extends CI_Model {
       array(
        'field'   => 'force_post',
        'label'   => '強制書き込み要求',
-       'rules'   => 'is_natural'
+       'rules'   => 'is_natural|less_than[2]'
       ),
       array(
        'field'   => 'dl_limit',

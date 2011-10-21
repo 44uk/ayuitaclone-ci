@@ -59,24 +59,17 @@ class Items extends CI_Controller {
   }
 
   public function edit() {
-    $this->form_validation->set_rules(
-      'pw_edit', '編集パスワード', 'required|alpha_numeric|callback_compare_pw_edit'
-    );
-
-    if( TRUE === $this->form_validation->run() ){
+    if( TRUE === $this->confirm_pw_edit() ){
       $data = array(
+        'confirm_pw_edit' => $this->input->post('confirm_pw_edit'),
         'item' => $this->Item_model->find_by_id( $this->input->post('id') ),
         'types' => $this->Type_model->get_dropdown(),
       );
       $this->load->view( 'items/edit', $data );
     }else{
+      $this->output->enable_profiler( TRUE );
       $this->show( $this->input->post('id') );
     }
-  }
-
-  public function compare_pw_edit( $str ){
-    $this->form_validation->set_message('compare_pw_edit', 'Password is not matched.');
-    return $this->Item_model->compare_edit_password( $this->input->post('id'), $str );
   }
 
   public function update() {
@@ -96,11 +89,27 @@ class Items extends CI_Controller {
       'dl_limit' => $this->input->post( 'dl_limit' ),
     );
 
-    if( TRUE === $this->form_validation->run() && $this->Item_model->update( $data ) ){
+    if(
+      TRUE === $this->form_validation->run() &&
+      TRUE === $this->confirm_pw_edit() &&
+      $this->Item_model->update( $data )
+    ){
       $this->load->view( 'items/update' );
     }else{
-      $this->add();
+      $this->edit();
     }
+  }
+
+  private function confirm_pw_edit(){
+    $this->form_validation->set_rules(
+      'confirm_pw_edit', '編集パスワード', 'required|alpha_numeric|callback_compare_pw_edit'
+    );
+    return $this->form_validation->run();
+  }
+
+  public function compare_pw_edit( $str ){
+    $this->form_validation->set_message('compare_pw_edit', 'Password is not matched.');
+    return $this->Item_model->compare_edit_password( $this->input->post('id'), $str );
   }
 
   public function destroy( $id ) {
@@ -114,5 +123,9 @@ class Items extends CI_Controller {
       $data = array( 'flash' => '削除失敗' );
     }
     $this->index();
+  }
+
+  public function comment(){
+
   }
 }
