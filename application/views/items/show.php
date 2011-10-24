@@ -39,7 +39,7 @@
 </div>
 
 <div id="post">
-  <?php echo form_open( 'items/thank' ) ?>
+  <?php echo form_open( 'items/comment' ) ?>
     <?php echo form_hidden( 'id', $item->id ) ?>
 
     <?php echo form_label( 'お名前', 'name' ) ?>

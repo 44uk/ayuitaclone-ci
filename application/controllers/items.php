@@ -126,6 +126,22 @@ class Items extends CI_Controller {
   }
 
   public function comment(){
+    $this->form_validation->set_rule(
+      $this->Thank_model->get_rule()
+    );
 
+    $data = array(
+      'id' => $this->input->post('id'),
+      'name' => $this->input->post( 'name' ),
+      'email' => $this->input->post( 'email' ),
+      'comment' => $this->input->post( 'comment' ),
+    );
+
+    if( TRUE === $this->form_validation->run() && $this->Thank_model->create( $data ) ){
+      $this->output->enable_profiler( TRUE );
+      $this->show($this->input->post('id'));
+    }else{
+      $this->load->view( 'items/show' );
+    }
   }
 }
