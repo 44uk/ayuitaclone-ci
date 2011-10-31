@@ -45,7 +45,7 @@
 */
 
 $active_group = 'default';
-if( FALSE === strpos( $_SERVER['HTTP_HOST'], 'cloudcontrolled.com' ) ){
+if( FALSE !== strpos( $_SERVER['HTTP_HOST'], 'cloudcontrolled.com' ) ){
   $active_group = 'cc';
 }
 $active_record = TRUE;
