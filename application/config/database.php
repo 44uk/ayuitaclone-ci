@@ -45,6 +45,9 @@
 */
 
 $active_group = 'default';
+if( FALSE === strpos( $_SERVER['HTTP_HOST'], 'cloudcontrolled.com' ) ){
+  $active_group = 'cc';
+}
 $active_record = TRUE;
 
 $db['default']['hostname'] = '127.0.0.1';
@@ -64,24 +67,22 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
 
-/*
-$db['default']['hostname'] = '127.0.0.1';
-$db['default']['username'] = 'depur5vmesc';
-$db['default']['password'] = 'bVbDwQeUeNbYdML';
-$db['default']['database'] = 'depur5vmesc';
-$db['default']['dbdriver'] = 'mysql';
-$db['default']['dbprefix'] = '';
-$db['default']['pconnect'] = TRUE;
-$db['default']['db_debug'] = TRUE;
-$db['default']['cache_on'] = FALSE;
-$db['default']['cachedir'] = '';
-$db['default']['char_set'] = 'utf8';
-$db['default']['dbcollat'] = 'utf8_general_ci';
-$db['default']['swap_pre'] = '';
-$db['default']['autoinit'] = TRUE;
-$db['default']['stricton'] = FALSE;
-*/
 
+$db['cc']['hostname'] = '127.0.0.1';
+$db['cc']['username'] = 'depur5vmesc';
+$db['cc']['password'] = 'bVbDwQeUeNbYdML';
+$db['cc']['database'] = 'depur5vmesc';
+$db['cc']['dbdriver'] = 'mysql';
+$db['cc']['dbprefix'] = '';
+$db['cc']['pconnect'] = TRUE;
+$db['cc']['db_debug'] = TRUE;
+$db['cc']['cache_on'] = FALSE;
+$db['cc']['cachedir'] = '';
+$db['cc']['char_set'] = 'utf8';
+$db['cc']['dbcollat'] = 'utf8_general_ci';
+$db['cc']['swap_pre'] = '';
+$db['cc']['autoinit'] = TRUE;
+$db['cc']['stricton'] = FALSE;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
