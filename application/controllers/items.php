@@ -17,6 +17,7 @@ class Items extends CI_Controller {
   }
 
   public function show( $id ) {
+
     $this->load->model( 'Thank_model' );
     $data = array(
       'item' => $this->Item_model->find_by_id( $id ),
