@@ -17,6 +17,7 @@ class Items extends CI_Controller {
   }
 
   public function show( $id ) {
+    if( ! $id ){ redirect('/'); }
 
     $this->load->model( 'Thank_model' );
     $data = array(
@@ -68,8 +69,7 @@ class Items extends CI_Controller {
       );
       $this->load->view( 'items/edit', $data );
     }else{
-      $this->output->enable_profiler( TRUE );
-      $this->show( $this->input->post('id') );
+      $this->show( $this->input->post( 'id' ) );
     }
   }
 
@@ -126,23 +126,40 @@ class Items extends CI_Controller {
     $this->index();
   }
 
+  public function get( $id ){
+    if( empty( $this->db
+      ->select( 'force_post' )
+      ->where( 'id', $id )
+      ->get( 'items' )->row()->force_post )
+    ){
+      $gots = $this->session->userdata( 'gots' );
+      $gots[] = $id;
+      $this->session->set_userdata( array(
+        'gots' => $gots
+      ) );
+      $this->Item_model->consume_count( $id );
+    }
+    redirect( "items/show/{$id}" );
+  }
+
   public function comment(){
-    $this->form_validation->set_rule(
-      $this->Thank_model->get_rule()
+    $this->load->model( 'Thank_model' );
+
+    $this->form_validation->set_rules(
+      $this->Thank_model->get_rules()
     );
 
     $data = array(
-      'id' => $this->input->post('id'),
+      'item_id' => $this->input->post( 'id' ),
       'name' => $this->input->post( 'name' ),
       'email' => $this->input->post( 'email' ),
       'comment' => $this->input->post( 'comment' ),
     );
 
     if( TRUE === $this->form_validation->run() && $this->Thank_model->create( $data ) ){
-      $this->output->enable_profiler( TRUE );
-      $this->show($this->input->post('id'));
+      $this->get( $this->input->post( 'id' ) );
     }else{
-      $this->load->view( 'items/show' );
+      $this->show( $this->input->post( 'id' ) );
     }
   }
 }

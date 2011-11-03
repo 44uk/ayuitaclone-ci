@@ -49,6 +49,14 @@ class Item_model extends CI_Model {
     return 1 === $res->num_rows() ? TRUE : FALSE;
   }
 
+  public function consume_count( $id ){
+    $cnt = 1 + $this->db->select( 'dl_count' )->where( 'id', $id )->get( 'items' )->row()->dl_count;
+    $this->db->set( 'updated_at', 'NOW()', FALSE );
+    $this->db->where( 'id', $id );
+    $res = $this->db->update( 'items', array( 'dl_count' => $cnt ) );
+    return $res;
+  }
+
   public function get_rules(){
     return array(
      array(
