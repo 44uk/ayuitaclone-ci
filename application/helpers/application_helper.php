@@ -9,16 +9,14 @@ function display_limit( $count, $consume ){
   }
 }
 
-function commented( $id, $gots ){
-  return is_array( $gots ) ? in_array( $id, $gots ) : FALSE;
+function h($var){
+  if (is_array($var)){
+    return array_map('h', $var);
+  }else{
+    return htmlspecialchars($var, ENT_QUOTES, config_item('charset'));
+  }
 }
 
-if ( ! function_exists('h')){
-  function h($var){
-    if (is_array($var)){
-      return array_map('h', $var);
-    }else{
-      return htmlspecialchars($var, ENT_QUOTES, config_item('charset'));
-    }
-  }
+function commented( $id, $gots ){
+  return is_array( $gots ) ? in_array( $id, $gots ) : FALSE;
 }

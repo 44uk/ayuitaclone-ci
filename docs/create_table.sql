@@ -40,17 +40,6 @@ CREATE TABLE thanks (
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS vips;
-CREATE TABLE vips (
-  id INTEGER(32) AUTO_INCREMENT,
-  login VARCHAR(255),
-  password VARCHAR(255),
-  created_at DATETIME,
-  updated_at DATETIME,
-  deleted_at DATETIME,
-  PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8;
-
 INSERT INTO types ( name ) VALUES ( '写真' );
 INSERT INTO types ( name ) VALUES ( '映像' );
 INSERT INTO types ( name ) VALUES ( '詩' );

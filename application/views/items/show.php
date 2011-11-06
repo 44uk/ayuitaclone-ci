@@ -13,22 +13,25 @@
   <p><?php echo h($item->provider_comment) ?></p>
   <p><?php echo date( 'Y/m/d H:i:s', strtotime( $item->created_at ) ) ?></p>
 
-  <?php if( commented( $item->id, $this->session->userdata( 'gots' ) ) ): ?>
+<?php if( commented( $item->id, $this->session->userdata( 'gots' ) ) ): ?>
   <pre><?php echo h($item->uri) ?></pre>
-  <?php elseif( empty( $item->force_post ) ): ?>
+<?php elseif( $item->force_post ): ?>
+  <pre>[ 要お礼書き込み ]</pre>
+<?php elseif( $is_closed ): ?>
+  <pre>[ 提供終了 ]</pre>
+<?php else: ?>
   <?php echo form_open( "items/get/{$item->id}" ) ?>
     <?php echo form_submit( 'get', '取得' ) ?>
   <?php echo form_close() ?>
-  <?php else: ?>
-  <pre>[ 要お礼書き込み ]</pre>
-  <?php endif ?>
+<?php endif ?>
 
   <p>
   <?php echo form_open( "items/edit" ) ?>
     <?php echo form_hidden( 'id', $item->id ) ?>
     <?php echo form_input( 'confirm_pw_edit', set_value( 'confirm_pw_edit' ) ) ?>
     <?php echo form_submit( 'edit', '編集' ) ?>
-    <?php echo form_button( 'destroy', '削除' ) ?>
+    <?php echo form_label( '削除', 'destroy' ) ?>
+    <?php echo form_checkbox( 'destroy', 1, set_value('destroy') ) ?>
   <?php echo form_close() ?>
   </p>
 </div>
@@ -59,7 +62,6 @@
     <?php echo form_textarea( 'comment', set_value('comment') ) ?>
 
     <?php echo form_submit( 'post', '送信' ) ?>
-
   <?php echo form_close() ?>
 </div>
 

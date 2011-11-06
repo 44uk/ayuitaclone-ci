@@ -23,6 +23,7 @@ class Items extends CI_Controller {
     $data = array(
       'item' => $this->Item_model->find_by_id( $id ),
       'thanks' => $this->Thank_model->find_all( $id ),
+      'is_closed' => $this->Item_model->is_closed( $id ),
     );
 
     $this->load->view( 'items/show', $data );
@@ -53,7 +54,6 @@ class Items extends CI_Controller {
     );
 
     if( TRUE === $this->form_validation->run() && $this->Item_model->create( $data ) ){
-      $this->output->enable_profiler( TRUE );
       $this->load->view( 'items/create' );
     }else{
       $this->add();
@@ -62,14 +62,18 @@ class Items extends CI_Controller {
 
   public function edit() {
     if( TRUE === $this->confirm_pw_edit() ){
-      $data = array(
-        'confirm_pw_edit' => $this->input->post('confirm_pw_edit'),
-        'item' => $this->Item_model->find_by_id( $this->input->post('id') ),
-        'types' => $this->Type_model->get_dropdown(),
-      );
-      $this->load->view( 'items/edit', $data );
+      if( $this->input->post('destroy') ){
+        $this->destroy( $this->input->post('id') );
+      }else{
+        $data = array(
+          'confirm_pw_edit' => $this->input->post('confirm_pw_edit'),
+          'item' => $this->Item_model->find_by_id( $this->input->post('id') ),
+          'types' => $this->Type_model->get_dropdown(),
+        );
+        $this->load->view( 'items/edit', $data );
+      }
     }else{
-      $this->show( $this->input->post( 'id' ) );
+      $this->show( $this->input->post('id') );
     }
   }
 
@@ -113,31 +117,17 @@ class Items extends CI_Controller {
     return $this->Item_model->compare_edit_password( $this->input->post('id'), $str );
   }
 
-  public function destroy( $id ) {
-    $this->form_validation->set_rules(
-      'pw_edit', '編集パスワード', 'required|alpha_numeric|callback_compare_pw_edit'
-    );
-
-    if( TRUE === $this->form_validation->run() && $this->Item_model->destroy_by_id( $id ) ){
-      $data = array( 'flash' => '削除成功' );
-    }else{
-      $data = array( 'flash' => '削除失敗' );
-    }
-    $this->index();
+  private function destroy( $id ) {
+    $this->Item_model->destroy_by_id( $id );
+    redirect( "items/index" );
   }
 
   public function get( $id ){
-    if( empty( $this->db
-      ->select( 'force_post' )
-      ->where( 'id', $id )
-      ->get( 'items' )->row()->force_post )
+    if(
+      ! $this->Item_model->is_force_post( $id ) &&
+      ! $this->Item_model->is_closed( $id )
     ){
-      $gots = $this->session->userdata( 'gots' );
-      $gots[] = $id;
-      $this->session->set_userdata( array(
-        'gots' => $gots
-      ) );
-      $this->Item_model->consume_count( $id );
+      $this->save_got_item( $id );
     }
     redirect( "items/show/{$id}" );
   }
@@ -156,10 +146,25 @@ class Items extends CI_Controller {
       'comment' => $this->input->post( 'comment' ),
     );
 
-    if( TRUE === $this->form_validation->run() && $this->Thank_model->create( $data ) ){
-      $this->get( $this->input->post( 'id' ) );
+    if(
+      TRUE === $this->form_validation->run() &&
+      $this->Thank_model->create( $data )
+    ){
+      if( ! $this->Item_model->is_closed( $this->input->post( 'id' ) ) ){
+        $this->save_got_item( $this->input->post( 'id' ) );
+      }
+      redirect( "items/show/{$this->input->post( 'id' )}" );
     }else{
       $this->show( $this->input->post( 'id' ) );
     }
+  }
+
+  private function save_got_item( $id ){
+      $gots = $this->session->userdata( 'gots' );
+      $gots[] = $id;
+      $this->session->set_userdata( array(
+        'gots' => $gots
+      ) );
+      $this->Item_model->consume_count( $id );
   }
 }

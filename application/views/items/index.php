@@ -2,8 +2,6 @@
 <?php echo $this->view( 'shared/head' ) ?>
 <body>
 
-
-
 <?php echo $this->view( 'shared/header' ) ?>
 
 <?php echo $this->view( 'shared/nav' ) ?>
@@ -27,21 +25,13 @@
   <tr>
     <td><?php echo date( 'Y/m/d', strtotime( $i->created_at ) ) ?></td>
     <td><?php echo h($i->provider_name) ?></td>
-    <td><?php echo anchor( "items/show/{$i->id}", $i->name ) ?></td>
+    <td><?php echo anchor( "items/show/{$i->id}", h($i->name) ) ?></td>
     <td><?php echo $i->type_name ?></td>
     <td><?php echo $i->dl_count ?></td>
     <td><?php echo display_limit( $i->dl_limit, $i->dl_count ) ?></td>
   </tr>
   <?php endforeach ?>
 </table>
-
-<h3>過去ログ一覧</h3>
-<ul>
-  <li>2011-4</li>
-  <li>2011-3</li>
-  <li>2011-2</li>
-  <li>2011-1</li>
-</ul>
 
 <?php echo $this->view( 'shared/footer' ) ?>
 

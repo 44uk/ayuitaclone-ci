@@ -67,7 +67,7 @@ $autoload['libraries'] = array(
 */
 
 $autoload['helper'] = array(
-  'cookie', 'date', 'form', 'html', 'url',
+  'form', 'html', 'url',
   'application',
 );
 

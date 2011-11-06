@@ -7,6 +7,7 @@ class Item_model extends CI_Model {
       ->select( 'items.*, types.name type_name' )
       ->join( 'types', 'items.type = types.id' )
       ->where( 'items.deleted_at IS NULL')
+      ->order_by( 'items.created_at', 'desc' )
       ->get( 'items' );
     return $res->result();
   }
@@ -55,6 +56,22 @@ class Item_model extends CI_Model {
     $this->db->where( 'id', $id );
     $res = $this->db->update( 'items', array( 'dl_count' => $cnt ) );
     return $res;
+  }
+
+  public function is_closed( $id ){
+    return ( 1 === $this->db
+      ->select( 'id' )
+      ->where( 'id', $id )
+      ->where( 'dl_limit <= dl_count' )
+      ->where( 'dl_limit !=', 0 )
+      ->get( 'items' )->num_rows() );
+  }
+
+  public function is_force_post( $id ){
+    return !empty( $this->db
+      ->select( 'force_post' )
+      ->where( 'id', $id )
+      ->get( 'items' )->row()->force_post );
   }
 
   public function get_rules(){
