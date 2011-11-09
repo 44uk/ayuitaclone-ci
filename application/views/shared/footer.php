@@ -1,1 +1,1 @@
-<p>2011 ayuita-clone</p>
+<p id="copy">2011 ayuita-clone</p>
