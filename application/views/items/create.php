@@ -4,9 +4,11 @@
 
 <?php echo $this->view( 'shared/header' ) ?>
 
-<?php echo $this->view( 'shared/nav' ) ?>
+<div id="container">
+  <?php echo $this->view( 'shared/nav' ) ?>
 
-<p>登録完了</p>
+  <p>登録完了</p>
+</div>
 
 <?php echo $this->view( 'shared/footer' ) ?>
 
