@@ -6,7 +6,6 @@
 
 <div id="container">
   <?php echo $this->view( 'shared/nav' ) ?>
-
   <p>登録完了</p>
 </div>
 

@@ -18,7 +18,6 @@ CREATE TABLE items (
   dl_count INTEGER(4) DEFAULT 0,
   created_at DATETIME,
   updated_at DATETIME,
-  deleted_at DATETIME,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8;
 

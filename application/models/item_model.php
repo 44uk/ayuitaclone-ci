@@ -6,7 +6,6 @@ class Item_model extends CI_Model {
     $res = $this->db
       ->select( 'items.*, types.name type_name' )
       ->join( 'types', 'items.type = types.id' )
-      ->where( 'items.deleted_at IS NULL')
       ->order_by( 'items.created_at', 'desc' )
       ->get( 'items' );
     return $res->result();
@@ -17,7 +16,6 @@ class Item_model extends CI_Model {
       ->select( 'items.*, types.name type_name' )
       ->join( 'types', 'items.type = types.id' )
       ->where( 'items.id', $id )
-      ->where( 'items.deleted_at IS NULL')
       ->get( 'items' );
     return $res->row();
   }
